@@ -1,8 +1,8 @@
 // src/router.jsx
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import HomePage from "./pages/homepage/homepages"; // Đảm bảo tên file và đường dẫn đúng
-import ErrorPage from "./pages/errorpage/ErrorPage"; // Đảm bảo tên file và đường dẫn đúng
+import HomePage from "./pages/homepage/homepages";
+import ErrorPage from "./pages/errorpage/Errorpage.jsx";
 import LoginPage from "./pages/loginPage/loginpage";
 import RegisterPage from "./pages/registerPage/registerPage";
 import SharedPage from "./pages/SharedPage/SharePage";
