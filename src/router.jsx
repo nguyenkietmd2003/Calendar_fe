@@ -7,6 +7,7 @@ import RegisterPage from "./pages/registerPage/registerPage";
 import SharedPage from "./pages/SharedPage/SharePage";
 import ProtectedRoute from "./util/protectedRoute.jsx";
 
+// VITE_BACKEND_URL=http://localhost:8000/
 export const router = createBrowserRouter([
   {
     path: "/",

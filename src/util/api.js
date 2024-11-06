@@ -30,7 +30,7 @@ export const shareLink = (id) => {
   return axios.post(URL_API);
 };
 export const getInfoByLink = (randomString) => {
-  const URL_API = `/v1/apiSchedule//get-info-by-link/${randomString}`;
+  const URL_API = `/v1/apiSchedule/get-info-by-link/${randomString}`;
   return axios.post(URL_API);
 };
 export const booking = (data) => {
