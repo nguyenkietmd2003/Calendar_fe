@@ -2,7 +2,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import HomePage from "./pages/homepage/homepages";
-import ErrorPage from "./pages/errorpage/Errorpage.jsx";
 import LoginPage from "./pages/loginPage/loginpage";
 import RegisterPage from "./pages/registerPage/registerPage";
 import SharedPage from "./pages/SharedPage/SharePage";
@@ -28,7 +27,7 @@ export const router = createBrowserRouter([
   // Route lỗi
   {
     path: "*",
-    element: <ErrorPage />,
+    element: <div>Error Page</div>,
   },
   {
     path: `/link-schedule/:randomString`,
