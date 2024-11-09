@@ -429,8 +429,9 @@ const HomePage = () => {
     const userID = user?.data?.user?.id;
     try {
       const getLink = await shareLink(userID);
-      console.log(getLink.data.message);
-      setLink(getLink.data.message);
+      console.log(getLink);
+      console.log(getLink?.data?.data?.link);
+      setLink(getLink?.data?.data?.link);
       setIsShowLink(true);
     } catch (error) {
       console.log(error);

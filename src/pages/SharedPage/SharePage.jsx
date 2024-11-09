@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { booking, getInfoByLink, getScheduleById } from "../../util/api";
+import { booking, getInfoByLink } from "../../util/api";
 import { useParams } from "react-router-dom";
 import "../homepage/homepage1.css";
 import "../homepage/homepage2.css";
@@ -22,30 +22,30 @@ const SharePage = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // State cho chế độ hiển thị
   const [isAppointmentMode, setIsAppointmentMode] = useState(false);
   const [isSuccessNotificationVisible, setIsSuccessNotificationVisible] =
     useState(false);
 
-  //
-
   //////
   const [apiSchedules, setApiSchedules] = useState([]);
-  const [bookedSchedules, setBookedSchedules] = useState([]);
   const { randomString } = useParams();
   useEffect(() => {
-    const fecthData = async () => {
+    const fetchData = async () => {
       try {
         const data = await getInfoByLink(randomString);
-        setApiSchedules(data?.data?.schedule);
-        console.log(data?.data?.schedule);
-        console.log("id", data?.data?.schedule[0].user_id);
-        setUserID(data?.data?.schedule[0].user_id);
+        console.log(data);
+        const schedule = data?.data?.schedule || [];
+        setApiSchedules(schedule);
+        console.log(schedule);
+
+        const userId = schedule.length > 0 ? schedule[0].user_id : 0;
+        console.log("id", userId);
+        setUserID(userId);
       } catch (error) {
         console.log(error);
       }
     };
-    fecthData();
+    fetchData();
   }, []);
 
   const goToPreviousMonth = () => {
@@ -70,8 +70,8 @@ const SharePage = () => {
     setIsFormVisible(true);
   };
   const handleScheduleClick = (schedule) => {
-    setSelectedSchedule(schedule); // Lưu thông tin lịch trình vào state
-    setIsModalVisible(true); // Hiển thị modal
+    setSelectedSchedule(schedule);
+    setIsModalVisible(true);
   };
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -93,7 +93,6 @@ const SharePage = () => {
     const startDay = firstDayOfMonth.getDay();
     const calendarDays = [];
 
-    // Render days of the week at the top
     calendarDays.push(
       ...daysOfWeek.map((day, index) => (
         <div key={`day-${index}`} className="day header-day">
@@ -111,7 +110,6 @@ const SharePage = () => {
       );
     }
 
-    // Add the actual days of the month
     for (let i = 1; i <= totalDays; i++) {
       const currentDate = new Date(currentYear, currentMonth, i);
       calendarDays.push(
@@ -224,7 +222,7 @@ const SharePage = () => {
     const startTime = convertTime(formData.startTime);
     const endTime = convertTime(formData.endTime);
     const newSchedule = {
-      user_id: userID, // Lấy user_id từ state
+      user_id: userID,
       guest_name: formData.name,
       guest_email: formData.email,
       start_time: `${date}T${startTime}`,
